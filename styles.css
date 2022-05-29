@@ -8,7 +8,7 @@
     width: 100vw;
     height: 100vh;
     /* to position the grid */
-    padding-top: 30vh;
+    padding-top: 29vh;
     padding-left: 45vw;
     background-image: url('classroom.jpg');
     display: grid;
@@ -17,6 +17,10 @@
 }
 .container>div{
     border: 1px solid white;
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 .container > div:nth-of-type(-n + 3){
     border-top: none;
@@ -37,4 +41,31 @@
     font-size: 4rem;
     top: 10vh;
     left: 45vw;
+}
+/* ------------------- */
+/* code to make a custom 'x' in the tic tac toe */
+.container > div.x::before,
+.container > div.x::after{
+    content: '';
+    width: 10px;
+    height: 90%;
+    background-color: white;
+    position:absolute;
+    border-radius: 5px;
+}
+.container > div.x::before{
+    transform: rotate(40deg);
+}
+.container > div.x::after{
+    transform: rotate(-40deg);
+}
+
+/* code to make a custom 'o' in the tic tac toe */
+.container > div.o::before{
+    content: '';
+    width: 60%;
+    height: 60%;
+    border: 10px solid white;
+    border-radius: 50%;
+    position:absolute;
 }
