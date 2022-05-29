@@ -69,3 +69,38 @@
     border-radius: 50%;
     position:absolute;
 }
+
+/* hover effect on unselected divs */
+.container > div:hover:not(.x):not(.o){
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* message to show after win or lose */
+.message{
+    padding-top: 30vh;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    text-align: center;
+    font-size: 2.6rem;
+    /* display: none; */
+}
+.message > button{
+    width: 300px;
+    height: 80px;
+    background-color: transparent;
+    color: white;
+    font-size: 2.5rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: .5s;
+    margin-top: 30px;
+}
+.message > button:hover{
+    background-color: white;
+    color: black;
+}
