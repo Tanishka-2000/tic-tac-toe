@@ -87,7 +87,7 @@
     color: white;
     text-align: center;
     font-size: 2.6rem;
-    /* display: none; */
+    display: none;
 }
 .message > button{
     width: 300px;
