@@ -52,11 +52,6 @@ const game = (function(){
         if(chance === 9) gameOver('tie');
     }
 
-    const tieGame = () => {
-        messageDiv.style.display = 'block';
-        messageDiv.firstElementChild.textContent = `Match tie !`;
-    }
-
     const gameOver = tied => {
         messageDiv.style.display = 'block';
         if(tied) {
