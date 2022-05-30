@@ -7,19 +7,26 @@ const game = (function(){
     let turn = 'x';
     let chance = 0;
     let winner;
+
     const addDivNumber = () => {
         let num = Number(div.getAttribute('data-number'));
         turn === 'x' ? playerX.push(num) : playerO.push(num);
     }
-    const changeTurn = () => turn = turn === 'x' ? 'o' : 'x';
-    const addMarkerClass = () => div.className = turn;
-    const changeTurnMessage = () => div.parentElement.className = turn === 'x' ? 'container x-turn' : 'container o-turn';
+
     const gameReset = () => {
         playerO.length = 0;
         playerX.length = 0;
         turn = 'x';
+        div.parentElement.className = 'container x-turn';
         div = null;
+        messageDiv.style.display = 'none';
+        let divs = container.querySelectorAll('div');
+        divs.forEach(item => {
+            item.className = '';
+        });
+        winner = null;
     }
+
     const checkWin = () =>{
         if(chance < 5) return;
         if(turn === 'x'){
@@ -34,26 +41,28 @@ const game = (function(){
         messageDiv.style.display = 'block';
         messageDiv.firstElementChild.textContent = `${winner.toUpperCase()} Win !`;
     }
+
     const markDiv = (e) => {
         div = e.target;
         if(div.className !== '') return;
         addDivNumber();
-        addMarkerClass();
+        div.className = turn;
         chance++;
         checkWin();
         if(winner) gameOver();
-
-        changeTurn();
-        changeTurnMessage();
+        turn = turn === 'x' ? 'o' : 'x';
+        div.parentElement.className = turn === 'x' ? 'container x-turn' : 'container o-turn';
     }
+
     return {markDiv, gameReset};
 })();
 
-let container = document.querySelector('.container');
-container.addEventListener('click', game.markDiv);
-
 const messageDiv = document.querySelector('.message');
+const container = document.querySelector('.container');
+const tryAgainBtn = messageDiv.querySelector('button');
 
+container.addEventListener('click', game.markDiv);
+tryAgainBtn.addEventListener('click', game.gameReset);
 
 // 1. Game starts
 //    1.1 Reset both arrays to empty
