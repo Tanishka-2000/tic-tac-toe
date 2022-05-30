@@ -40,15 +40,30 @@ const game = (function(){
     const checkWin = () =>{
         if(chance < 5) return;
         if(turn === 'x'){
-            if(winningCombinations.some(arr => arr.every(num => playerX.includes(num)))) winner = 'x';
+            if(winningCombinations.some(arr => arr.every(num => playerX.includes(num)))) {
+                winner = 'x';
+                return;
+            }
         }else{
-            if(winningCombinations.some(arr => arr.every(num => playerO.includes(num)))) winner = 'o';
+            if(winningCombinations.some(arr => arr.every(num => playerO.includes(num)))) {
+                winner = 'o';
+                return;}
         }
+        if(chance === 9) gameOver('tie');
     }
 
-    const gameOver = () => {
+    const tieGame = () => {
         messageDiv.style.display = 'block';
-        messageDiv.firstElementChild.textContent = `${winner.toUpperCase()} Win !`;
+        messageDiv.firstElementChild.textContent = `Match tie !`;
+    }
+
+    const gameOver = tied => {
+        messageDiv.style.display = 'block';
+        if(tied) {
+            messageDiv.firstElementChild.textContent = `Match tie !`;
+        }else{
+            messageDiv.firstElementChild.textContent = `${winner.toUpperCase()} Win !`;
+        }
     }
 
     const markDiv = (e) => {
