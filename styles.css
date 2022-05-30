@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+body{
+    font-family: 'Roboto', sans-serif;
+}
 .container{
     width: 100vw;
     height: 100vh;
@@ -38,7 +40,7 @@
 
 .container >h1{
     position: absolute;
-    color: white;
+    color: #219F94;
     font-size: 4rem;
     top: 10vh;
     left: 45vw;
@@ -46,7 +48,7 @@
 
 /* ------------------- */
 .container.x-turn::before{
-    content: "X's turn";
+    content: "X's Turn";
     position: absolute;
     font-size: 2.5rem;
     color: white;
@@ -55,7 +57,7 @@
 }
 
 .container.o-turn::after{
-    content: "O's turn";
+    content: "O's Turn";
     position: absolute;
     font-size: 2.5rem;
     color: white;
@@ -112,7 +114,7 @@
     color: white;
     text-align: center;
     font-size: 2.6rem;
-    display: none;
+    display: block;
 }
 .message > button{
     width: 300px;

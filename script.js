@@ -3,28 +3,38 @@ const game = (function(){
     const winningCombinations = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
     const playerX = [];
     const playerO = [];
-    let div;
+    let div, winner;
     let turn = 'x';
     let chance = 0;
-    let winner;
 
     const addDivNumber = () => {
         let num = Number(div.getAttribute('data-number'));
         turn === 'x' ? playerX.push(num) : playerO.push(num);
     }
+    const displayTurnMessage = () => {
+        let classToRemove = turn === 'x' ? 'o-turn' : 'x-turn' ;
+        container.classList.remove(classToRemove);
+        container.classList.add(turn + '-turn');
+    }
 
     const gameReset = () => {
+        if(tryAgainBtn.textContent === 'Start Game'){
+            tryAgainBtn.textContent = 'Try Again';
+            messageDiv.style.display = 'none';
+            return;
+        }
         playerO.length = 0;
         playerX.length = 0;
         turn = 'x';
-        div.parentElement.className = 'container x-turn';
+        chance = 0;
         div = null;
-        messageDiv.style.display = 'none';
+        winner = null;
+        displayTurnMessage();
         let divs = container.querySelectorAll('div');
         divs.forEach(item => {
             item.className = '';
         });
-        winner = null;
+        messageDiv.style.display = 'none';
     }
 
     const checkWin = () =>{
@@ -37,7 +47,6 @@ const game = (function(){
     }
 
     const gameOver = () => {
-        console.log(`${winner} wins!`);
         messageDiv.style.display = 'block';
         messageDiv.firstElementChild.textContent = `${winner.toUpperCase()} Win !`;
     }
@@ -51,7 +60,7 @@ const game = (function(){
         checkWin();
         if(winner) gameOver();
         turn = turn === 'x' ? 'o' : 'x';
-        div.parentElement.className = turn === 'x' ? 'container x-turn' : 'container o-turn';
+        displayTurnMessage();
     }
 
     return {markDiv, gameReset};
